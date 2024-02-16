@@ -1,0 +1,4 @@
+# Directorios de cache
+/sites/*/files/php/*
+/sites/*/files/css/*
+/sites/*/files/js/*

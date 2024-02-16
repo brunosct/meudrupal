@@ -1,0 +1,39 @@
+version: '3'
+services:
+  web:
+    build: apache
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./app:/app
+      - ./apache/exemplo.lan.conf:/etc/apache2/sites-enabled/exemplo.lan.conf
+      - ./apache/exemplo.lan.pem:/etc/ssl/certs/exemplo.lan.pem
+      - ./apache/exemplo.lan.key:/etc/ssl/private/exemplo.lan.key
+      - ./apache/daw2324.giize.con.pem:/etc/ssl/certs/daw2324.giize.con.pem
+      - ./apache/daw2324.giize.con.key:/etc/ssl/private/daw2324.giize.con.key
+
+  basedatos:
+    image: mariadb
+    # ports:
+    #   - 3306:3306
+    environment:
+      MARIADB_ROOT_PASSWORD_HASH: dc76e9f0c0006e8f919e0c515c66dbba3982f785
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    volumes:
+      - datos:/var/lib/mysql    
+  phpmyadmin:
+    image: phpmyadmin
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: basedatos
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+
+volumes:
+  datos:
