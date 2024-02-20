@@ -12,8 +12,8 @@ services:
       - ./apache/exemplo.lan.conf:/etc/apache2/sites-enabled/exemplo.lan.conf
       - ./apache/exemplo.lan.pem:/etc/ssl/certs/exemplo.lan.pem
       - ./apache/exemplo.lan.key:/etc/ssl/private/exemplo.lan.key
-      - ./apache/daw2324.giize.com.pem:/etc/ssl/certs/daw2324.giize.con.pem
-      - ./apache/daw2324.giize.com.key:/etc/ssl/private/daw2324.giize.con.key
+      - ./apache/daw2324.giize.com.pem:/etc/ssl/certs/daw2324.giize.com.pem
+      - ./apache/daw2324.giize.com.key:/etc/ssl/private/daw2324.giize.com.key
 
   basedatos:
     image: mariadb
