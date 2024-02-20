@@ -2,6 +2,8 @@ version: '3'
 services:
   web:
     build: apache
+    env_file:
+      - .env
     ports:
       - 80:80
       - 443:443
@@ -10,20 +12,21 @@ services:
       - ./apache/exemplo.lan.conf:/etc/apache2/sites-enabled/exemplo.lan.conf
       - ./apache/exemplo.lan.pem:/etc/ssl/certs/exemplo.lan.pem
       - ./apache/exemplo.lan.key:/etc/ssl/private/exemplo.lan.key
-      - ./apache/daw2324.giize.con.pem:/etc/ssl/certs/daw2324.giize.con.pem
-      - ./apache/daw2324.giize.con.key:/etc/ssl/private/daw2324.giize.con.key
+      - ./apache/daw2324.giize.com.pem:/etc/ssl/certs/daw2324.giize.con.pem
+      - ./apache/daw2324.giize.com.key:/etc/ssl/private/daw2324.giize.con.key
 
   basedatos:
     image: mariadb
     # ports:
     #   - 3306:3306
     environment:
-      MARIADB_ROOT_PASSWORD_HASH: dc76e9f0c0006e8f919e0c515c66dbba3982f785
+      MARIADB_ROOT_PASSWORD: abc123.
       MYSQL_DATABASE: db
       MYSQL_USER: user
       MYSQL_PASSWORD: user
     volumes:
       - datos:/var/lib/mysql 
+      - ./bd/backup.sql:/docker-entrypoint-initdb.d/backup.sql
       - ./bd:/bd
   phpmyadmin:
     image: phpmyadmin
